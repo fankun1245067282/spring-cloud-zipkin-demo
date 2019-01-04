@@ -213,7 +213,7 @@ sleuth会自动装配一个名为TraceFliter的组件（在Spring WebMVC Dispatc
 
 
 
-### Zipkin整合
+###Zipkin整合
 
 ####创建Spring-Cloud-Zipkin服务器（模块名称）
 
@@ -270,10 +270,6 @@ public class ZipkinServerApplication {
 
 ####maven导入
 
-
-
-
-
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -313,7 +309,7 @@ http://localhost:23456/zipkin/
 
 
 
-### 整合全部服务（HTTP方式）spring-cloud-zipkin-demo 模块
+### 整合全部服务（HTTP方式）spring-cloud-sleuth-demo 模块
 
 ####程序调用链：
 
@@ -557,4 +553,60 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 重新启动
 
-[sleuth-server,cafebeab9ced1142,cafebeab9ced1142,false]
+### Spring Cloud Stream收集（消息）【之前是http收集】
+
+#### 调整zipkin-server通过stream来收集
+
+#### maven导入
+
+```xml
+<!--Zipkin 服务器通过stream跟踪信息-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+</dependency>
+<!--Zipkin 服务器依赖-->
+<!--<dependency>-->
+    <!--<groupId>io.zipkin.java</groupId>-->
+    <!--<artifactId>zipkin-server</artifactId>-->
+<!--</dependency>-->
+<!--Zipkin 服务器UI控制器-->
+<dependency>
+    <groupId>io.zipkin.java</groupId>
+    <artifactId>zipkin-autoconfigure-ui</artifactId>
+    <!--<scope>runtime</scope>-->
+</dependency>
+<!--使用kafka作为stream服务器-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+</dependency>
+```
+
+####启动zookeeper
+
+####启动kafka
+
+#### 启动当前服务 zipkin-server
+
+####zipkin客户端配置：
+
+#####调整zuul-server
+
+#####maven导入
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-sleuth-stream</artifactId>
+</dependency>
+```
+

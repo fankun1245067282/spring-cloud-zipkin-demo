@@ -28,7 +28,11 @@
             <scope>test</scope>
         </dependency>
 
-
+        <!--Zipkin 服务器通过stream跟踪信息-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+        </dependency>
         <!--Zipkin 服务器依赖-->
         <dependency>
             <groupId>io.zipkin.java</groupId>
@@ -39,6 +43,11 @@
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-autoconfigure-ui</artifactId>
             <!--<scope>runtime</scope>-->
+        </dependency>
+        <!--使用kafka作为stream服务器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
         </dependency>
     </dependencies>
 
